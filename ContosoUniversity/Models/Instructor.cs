@@ -5,9 +5,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ContosoUniversity.Models
 {
-    public class Student
+    public class Instructor
     {
-        public int StudentID { get; set; }
+        public Int32 InstructorID { get; set; }
 
         [Required(ErrorMessage = "Last name is required.")]
         [Display(Name = "Last Name")]
@@ -20,10 +20,10 @@ namespace ContosoUniversity.Models
         [MaxLength(50)]
         public string FirstMidName { get; set; }
 
-        [Required(ErrorMessage = "Enrollment date is required.")]
         [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
-        [Display(Name = "Enrollment Date")]
-        public DateTime? EnrollmentDate { get; set; }
+        [Required(ErrorMessage = "Hire date is required.")]
+        [Display(Name = "Hire Date")]
+        public DateTime? HireDate { get; set; }
 
         public string FullName
         {
@@ -33,6 +33,7 @@ namespace ContosoUniversity.Models
             }
         }
 
-        public virtual ICollection<Enrollment> Enrollments { get; set; }
+        public virtual ICollection<Course> Courses { get; set; }
+        public virtual OfficeAssignment OfficeAssignment { get; set; }
     }
 }

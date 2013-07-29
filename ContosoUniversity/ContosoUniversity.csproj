@@ -171,15 +171,18 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201307271430380_Initial.cs" />
-    <Compile Include="Migrations\201307271430380_Initial.Designer.cs">
-      <DependentUpon>201307271430380_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201307291408545_addTalbles.cs" />
+    <Compile Include="Migrations\201307291408545_addTalbles.Designer.cs">
+      <DependentUpon>201307291408545_addTalbles.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Course.cs" />
+    <Compile Include="Models\Department.cs" />
     <Compile Include="Models\Enrollment.cs" />
     <Compile Include="Models\EnrollmentDateGroup.cs" />
+    <Compile Include="Models\Instructor.cs" />
+    <Compile Include="Models\OfficeAssignment.cs" />
     <Compile Include="Models\SchoolContext.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -310,8 +313,8 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201307271430380_Initial.resx">
-      <DependentUpon>201307271430380_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201307291408545_addTalbles.resx">
+      <DependentUpon>201307291408545_addTalbles.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
