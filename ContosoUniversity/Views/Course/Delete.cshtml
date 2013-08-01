@@ -10,30 +10,40 @@
 <fieldset>
     <legend>Course</legend>
 
+    <div class="editor-label">
+        @Html.LabelFor(model => model.CourseID)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.CourseID)
+        @Html.ValidationMessageFor(model => model.CourseID)
+    </div>
+
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Title)
+        @Html.DisplayNameFor(model => model.Title)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Title)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Credits)
+        @Html.DisplayNameFor(model => model.Credits)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Credits)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Department.Name)
+        @Html.DisplayNameFor(model => model.Department.Name)
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.Department.Name)
     </div>
 </fieldset>
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     <p>
-        <input type="submit" value="Delete" /> |
+        <input type="submit" value="Delete" />
+        |
         @Html.ActionLink("Back to List", "Index")
     </p>
 }
