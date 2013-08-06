@@ -69,15 +69,31 @@ namespace ContosoUniversity.Migrations
             );
 
             context.Departments.AddOrUpdate(
+          P => P.Name,
+    new Department { Name = "English", Budget = 350000, StartDate = DateTime.Parse("2007-09-01"), Administrator = instructors[0]},
+    new Department { Name = "Mathematics", Budget = 100000, StartDate = DateTime.Parse("2007-09-01"), Administrator = instructors[1] },
+    new Department { Name = "Engineering", Budget = 350000, StartDate = DateTime.Parse("2007-09-01"), Administrator = instructors[2] },
+    new Department { Name = "Economics", Budget = 100000, StartDate = DateTime.Parse("2007-09-01"), Administrator = instructors[3] }
+         );
+            /*
+            context.Departments.AddOrUpdate(
                       P=>P.Name,
                 new Department { Name = "English", Budget = 350000, StartDate = DateTime.Parse("2007-09-01"), Administrator = context.Instructors.Local.SingleOrDefault(s => s.FirstMidName == "Kim" && s.LastName == "Abercrombie") },
                 new Department { Name = "Mathematics", Budget = 100000, StartDate = DateTime.Parse("2007-09-01"), Administrator = context.Instructors.Local.SingleOrDefault(s => s.FirstMidName == "Fadi" && s.LastName == "Fakhouri") },
                 new Department { Name = "Engineering", Budget = 350000, StartDate = DateTime.Parse("2007-09-01"), Administrator = context.Instructors.Local.SingleOrDefault(s => s.FirstMidName == "Roger" && s.LastName == "Harui") },
                 new Department { Name = "Economics", Budget = 100000, StartDate = DateTime.Parse("2007-09-01"), Administrator = context.Instructors.Local.SingleOrDefault(s => s.FirstMidName == "Candace" && s.LastName == "Kapoor") }        
                      );
+             */
+
+            /*
+            context.Courses.AddOrUpdate(
+p => p.CourseID,
+new Course { CourseID = 1050, Title = "Chemistry", Credits = 3, Department = context.Departments.SingleOrDefault(s => s.DepartmentID == 2), Instructors = new[] { instructors[0], instructors[1] } } 
+);
+             */
 
             context.Courses.AddOrUpdate(
-    p => p.Title,
+    p => p.CourseID,
     new Course { CourseID = 1050, Title = "Chemistry", Credits = 3, Department = context.Departments.Local.SingleOrDefault(s => s.Name == "Engineering"), Instructors = new[] { instructors[0], instructors[1] } },
     new Course { CourseID = 4022, Title = "Microeconomics", Credits = 3, Department = context.Departments.Local.SingleOrDefault(s => s.Name == "Economics"), Instructors = new[] { instructors[2] } },
     new Course { CourseID = 4041, Title = "Macroeconomics", Credits = 3, Department = context.Departments.Local.SingleOrDefault(s => s.Name == "Economics"), Instructors = new[] { instructors[2] } },

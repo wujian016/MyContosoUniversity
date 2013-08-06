@@ -3,7 +3,7 @@ namespace ContosoUniversity.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class addTalbles : DbMigration
+    public partial class initial : DbMigration
     {
         public override void Up()
         {
@@ -29,6 +29,7 @@ namespace ContosoUniversity.Migrations
                         Budget = c.Decimal(nullable: false, storeType: "money"),
                         StartDate = c.DateTime(nullable: false),
                         InstructorID = c.Int(),
+                        RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
                     })
                 .PrimaryKey(t => t.DepartmentID)
                 .ForeignKey("dbo.Instructor", t => t.InstructorID)
