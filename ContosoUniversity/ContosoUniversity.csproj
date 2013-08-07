@@ -174,9 +174,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201308050328344_initial.cs" />
-    <Compile Include="Migrations\201308050328344_initial.Designer.cs">
-      <DependentUpon>201308050328344_initial.cs</DependentUpon>
+    <Compile Include="Migrations\201308071356210_initial.cs" />
+    <Compile Include="Migrations\201308071356210_initial.Designer.cs">
+      <DependentUpon>201308071356210_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
@@ -186,6 +186,7 @@
     <Compile Include="Models\EnrollmentDateGroup.cs" />
     <Compile Include="Models\Instructor.cs" />
     <Compile Include="Models\OfficeAssignment.cs" />
+    <Compile Include="Models\Person.cs" />
     <Compile Include="Models\SchoolContext.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -333,8 +334,8 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201308050328344_initial.resx">
-      <DependentUpon>201308050328344_initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201308071356210_initial.resx">
+      <DependentUpon>201308071356210_initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

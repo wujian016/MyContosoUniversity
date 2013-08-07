@@ -28,34 +28,36 @@ namespace ContosoUniversity.Migrations
                         Name = c.String(nullable: false, maxLength: 50),
                         Budget = c.Decimal(nullable: false, storeType: "money"),
                         StartDate = c.DateTime(nullable: false),
-                        InstructorID = c.Int(),
+                        PersonID = c.Int(),
                         RowVersion = c.Binary(nullable: false, fixedLength: true, timestamp: true, storeType: "rowversion"),
                     })
                 .PrimaryKey(t => t.DepartmentID)
-                .ForeignKey("dbo.Instructor", t => t.InstructorID)
-                .Index(t => t.InstructorID);
+                .ForeignKey("dbo.Person", t => t.PersonID)
+                .Index(t => t.PersonID);
             
             CreateTable(
-                "dbo.Instructor",
+                "dbo.Person",
                 c => new
                     {
-                        InstructorID = c.Int(nullable: false, identity: true),
-                        LastName = c.String(nullable: false, maxLength: 50),
-                        FirstName = c.String(nullable: false, maxLength: 50),
-                        HireDate = c.DateTime(nullable: false),
+                        PersonID = c.Int(nullable: false, identity: true),
+                        LastName = c.String(maxLength: 50),
+                        FirstName = c.String(maxLength: 50),
+                        HireDate = c.DateTime(),
+                        EnrollmentDate = c.DateTime(),
+                        Discriminator = c.String(nullable: false, maxLength: 128),
                     })
-                .PrimaryKey(t => t.InstructorID);
+                .PrimaryKey(t => t.PersonID);
             
             CreateTable(
                 "dbo.OfficeAssignment",
                 c => new
                     {
-                        InstructorID = c.Int(nullable: false),
+                        PersonID = c.Int(nullable: false),
                         Location = c.String(maxLength: 50),
                     })
-                .PrimaryKey(t => t.InstructorID)
-                .ForeignKey("dbo.Instructor", t => t.InstructorID)
-                .Index(t => t.InstructorID);
+                .PrimaryKey(t => t.PersonID)
+                .ForeignKey("dbo.Person", t => t.PersonID)
+                .Index(t => t.PersonID);
             
             CreateTable(
                 "dbo.Enrollment",
@@ -63,62 +65,50 @@ namespace ContosoUniversity.Migrations
                     {
                         EnrollmentID = c.Int(nullable: false, identity: true),
                         CourseID = c.Int(nullable: false),
-                        StudentID = c.Int(nullable: false),
+                        PersonID = c.Int(nullable: false),
                         Grade = c.Decimal(precision: 18, scale: 2),
                     })
                 .PrimaryKey(t => t.EnrollmentID)
                 .ForeignKey("dbo.Course", t => t.CourseID, cascadeDelete: true)
-                .ForeignKey("dbo.Student", t => t.StudentID, cascadeDelete: true)
+                .ForeignKey("dbo.Person", t => t.PersonID, cascadeDelete: true)
                 .Index(t => t.CourseID)
-                .Index(t => t.StudentID);
-            
-            CreateTable(
-                "dbo.Student",
-                c => new
-                    {
-                        StudentID = c.Int(nullable: false, identity: true),
-                        LastName = c.String(nullable: false, maxLength: 50),
-                        FirstName = c.String(nullable: false, maxLength: 50),
-                        EnrollmentDate = c.DateTime(nullable: false),
-                    })
-                .PrimaryKey(t => t.StudentID);
+                .Index(t => t.PersonID);
             
             CreateTable(
                 "dbo.CourseInstructor",
                 c => new
                     {
                         CourseID = c.Int(nullable: false),
-                        InstructorID = c.Int(nullable: false),
+                        PersonID = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => new { t.CourseID, t.InstructorID })
+                .PrimaryKey(t => new { t.CourseID, t.PersonID })
                 .ForeignKey("dbo.Course", t => t.CourseID, cascadeDelete: true)
-                .ForeignKey("dbo.Instructor", t => t.InstructorID, cascadeDelete: true)
+                .ForeignKey("dbo.Person", t => t.PersonID, cascadeDelete: true)
                 .Index(t => t.CourseID)
-                .Index(t => t.InstructorID);
+                .Index(t => t.PersonID);
             
         }
         
         public override void Down()
         {
-            DropIndex("dbo.CourseInstructor", new[] { "InstructorID" });
+            DropIndex("dbo.CourseInstructor", new[] { "PersonID" });
             DropIndex("dbo.CourseInstructor", new[] { "CourseID" });
-            DropIndex("dbo.Enrollment", new[] { "StudentID" });
+            DropIndex("dbo.Enrollment", new[] { "PersonID" });
             DropIndex("dbo.Enrollment", new[] { "CourseID" });
-            DropIndex("dbo.OfficeAssignment", new[] { "InstructorID" });
-            DropIndex("dbo.Department", new[] { "InstructorID" });
+            DropIndex("dbo.OfficeAssignment", new[] { "PersonID" });
+            DropIndex("dbo.Department", new[] { "PersonID" });
             DropIndex("dbo.Course", new[] { "DepartmentID" });
-            DropForeignKey("dbo.CourseInstructor", "InstructorID", "dbo.Instructor");
+            DropForeignKey("dbo.CourseInstructor", "PersonID", "dbo.Person");
             DropForeignKey("dbo.CourseInstructor", "CourseID", "dbo.Course");
-            DropForeignKey("dbo.Enrollment", "StudentID", "dbo.Student");
+            DropForeignKey("dbo.Enrollment", "PersonID", "dbo.Person");
             DropForeignKey("dbo.Enrollment", "CourseID", "dbo.Course");
-            DropForeignKey("dbo.OfficeAssignment", "InstructorID", "dbo.Instructor");
-            DropForeignKey("dbo.Department", "InstructorID", "dbo.Instructor");
+            DropForeignKey("dbo.OfficeAssignment", "PersonID", "dbo.Person");
+            DropForeignKey("dbo.Department", "PersonID", "dbo.Person");
             DropForeignKey("dbo.Course", "DepartmentID", "dbo.Department");
             DropTable("dbo.CourseInstructor");
-            DropTable("dbo.Student");
             DropTable("dbo.Enrollment");
             DropTable("dbo.OfficeAssignment");
-            DropTable("dbo.Instructor");
+            DropTable("dbo.Person");
             DropTable("dbo.Department");
             DropTable("dbo.Course");
         }

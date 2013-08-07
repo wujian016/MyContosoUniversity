@@ -5,34 +5,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ContosoUniversity.Models
 {
-    public class Student
+    public class Student : Person
     {
-        public int StudentID { get; set; }
-
-        [Required(ErrorMessage = "Last name is required.")]
-        [Display(Name = "Last Name")]
-        [MaxLength(50)]
-        public string LastName { get; set; }
-
-        [Required(ErrorMessage = "First name is required.")]
-        [Column("FirstName")]
-        [Display(Name = "First Name")]
-        [MaxLength(50)]
-        public string FirstMidName { get; set; }
-
-        [Required(ErrorMessage = "Enrollment date is required.")]
-        [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.Date)]
         [Display(Name = "Enrollment Date")]
-        public DateTime? EnrollmentDate { get; set; }
-
-        public string FullName
-        {
-            get
-            {
-                return LastName + ", " + FirstMidName;
-            }
-        }
+        public DateTime EnrollmentDate { get; set; }
 
         public virtual ICollection<Enrollment> Enrollments { get; set; }
-    }
+    } 
 }

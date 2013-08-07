@@ -61,12 +61,14 @@ namespace ContosoUniversity.Migrations
                     new Instructor { FirstMidName = "Roger", LastName = "Zheng", HireDate = DateTime.Parse("2004-02-12") }
                 };
 
+            /*
             context.OfficeAssignments.AddOrUpdate(
-                p => p.Location,
-                new OfficeAssignment { InstructorID = 1, Location = "Smith 17" },
-                new OfficeAssignment { InstructorID = 2, Location = "Gowan 27" },
-                new OfficeAssignment { InstructorID = 3, Location = "Thompson 304" }
-            );
+    p => p.Location,
+    new OfficeAssignment { PersonID = 1, Location = "Smith 17" },
+    new OfficeAssignment { PersonID = 2, Location = "Gowan 27" },
+    new OfficeAssignment { PersonID = 3, Location = "Thompson 304" }
+);
+             */
 
             context.Departments.AddOrUpdate(
           P => P.Name,
@@ -117,7 +119,7 @@ new Course { CourseID = 1050, Title = "Chemistry", Credits = 3, Department = con
              */
 
             context.Enrollments.AddOrUpdate(
-             p => new { p.StudentID, p.EnrollmentID },
+             p => new { p.PersonID, p.EnrollmentID },
                  new Enrollment { Student = context.Students.Local.SingleOrDefault(s => s.FirstMidName == "Carson" && s.LastName == "Alexander"), Course = context.Courses.Local.SingleOrDefault(c => c.Title == "Chemistry"), Grade = 1 },
                  new Enrollment { Student = context.Students.Local.SingleOrDefault(s => s.FirstMidName == "Carson" && s.LastName == "Alexander"), Course = context.Courses.Local.SingleOrDefault(c => c.Title == "Microeconomics"), Grade = 3 },
                  new Enrollment { Student = context.Students.Local.SingleOrDefault(s => s.FirstMidName == "Carson" && s.LastName == "Alexander"), Course = context.Courses.Local.SingleOrDefault(c => c.Title == "Macroeconomics"), Grade = 1 },
@@ -131,7 +133,13 @@ new Course { CourseID = 1050, Title = "Chemistry", Credits = 3, Department = con
                  new Enrollment { Student = context.Students.Local.SingleOrDefault(s => s.FirstMidName == "Peggy" && s.LastName == "Justice"), Course = context.Courses.Local.SingleOrDefault(c => c.Title == "Calculus") },
                  new Enrollment { Student = context.Students.Local.SingleOrDefault(s => s.FirstMidName == "Laura" && s.LastName == "Norman"), Course = context.Courses.Local.SingleOrDefault(c => c.Title == "Trigonometry"), Grade = 2 }
                 );
-            
+
+            context.OfficeAssignments.AddOrUpdate(
+    p => p.Location,
+    new OfficeAssignment { Instructor = context.Instructors.Local.SingleOrDefault(s => s.FirstMidName == "Kim" && s.LastName == "Abercrombie"), Location = "Smith 17" },
+    new OfficeAssignment { Instructor = context.Instructors.Local.SingleOrDefault(s => s.FirstMidName == "Fadi" && s.LastName == "Fakhouri"), Location = "Gowan 27" },
+    new OfficeAssignment { Instructor = context.Instructors.Local.SingleOrDefault(s => s.FirstMidName == "Roger" && s.LastName == "Harui"), Location = "Thompson 304" }
+);
         }
     }
 }
