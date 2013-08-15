@@ -4,7 +4,9 @@ namespace ContosoUniversity.Migrations
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
+    using System.Web.Security;
     using ContosoUniversity.Models;
+    using WebMatrix.WebData;
 
     internal sealed class Configuration : DbMigrationsConfiguration<ContosoUniversity.Models.SchoolContext>
     {
@@ -27,7 +29,7 @@ namespace ContosoUniversity.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
-            
+
 
             context.Students.AddOrUpdate(
                   p => new { p.FirstMidName, p.LastName },
@@ -72,7 +74,7 @@ namespace ContosoUniversity.Migrations
 
             context.Departments.AddOrUpdate(
           P => P.Name,
-    new Department { Name = "English", Budget = 350000, StartDate = DateTime.Parse("2007-09-01"), Administrator = instructors[0]},
+    new Department { Name = "English", Budget = 350000, StartDate = DateTime.Parse("2007-09-01"), Administrator = instructors[0] },
     new Department { Name = "Mathematics", Budget = 100000, StartDate = DateTime.Parse("2007-09-01"), Administrator = instructors[1] },
     new Department { Name = "Engineering", Budget = 350000, StartDate = DateTime.Parse("2007-09-01"), Administrator = instructors[2] },
     new Department { Name = "Economics", Budget = 100000, StartDate = DateTime.Parse("2007-09-01"), Administrator = instructors[3] }
@@ -104,7 +106,7 @@ new Course { CourseID = 1050, Title = "Chemistry", Credits = 3, Department = con
     new Course { CourseID = 2021, Title = "Composition", Credits = 3, Department = context.Departments.Local.SingleOrDefault(s => s.Name == "English"), Instructors = new[] { instructors[3] } },
     new Course { CourseID = 2042, Title = "Literature", Credits = 4, Department = context.Departments.Local.SingleOrDefault(s => s.Name == "English"), Instructors = new[] { instructors[3] } }
   );
-           
+
             /*
             context.Courses.AddOrUpdate(
                 p => p.Title,
@@ -140,6 +142,29 @@ new Course { CourseID = 1050, Title = "Chemistry", Credits = 3, Department = con
     new OfficeAssignment { Instructor = context.Instructors.Local.SingleOrDefault(s => s.FirstMidName == "Fadi" && s.LastName == "Fakhouri"), Location = "Gowan 27" },
     new OfficeAssignment { Instructor = context.Instructors.Local.SingleOrDefault(s => s.FirstMidName == "Roger" && s.LastName == "Harui"), Location = "Thompson 304" }
 );
+
+            if (WebSecurity.Initialized == false)
+            {
+
+                WebSecurity.InitializeDatabaseConnection("DefaultConnection", "UserProfile", "UserId", "UserName", autoCreateTables: true);
+
+                var roles = (SimpleRoleProvider)Roles.Provider;
+                var membership = (SimpleMembershipProvider)Membership.Provider;
+
+                if (!roles.RoleExists("admin"))
+                {
+                    roles.CreateRole("admin");
+                }
+                if (membership.GetUser("sallen", false) == null)
+                {
+                    membership.CreateUserAndAccount("sallen", "123456");
+                }
+                if (!roles.GetRolesForUser("sallen").Contains("admin"))
+                {
+                    roles.AddUsersToRoles(new[] { "sallen" }, new[] { "admin" });
+                }
+            }
         }
+
     }
 }

@@ -14,6 +14,11 @@ namespace ContosoUniversity.Models
            // this.Configuration.LazyLoadingEnabled = false;
        // }
 
+        public SchoolContext()
+            : base("DefaultConnection")
+        {
+        }
+
         public DbSet<Course> Courses { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Enrollment> Enrollments { get; set; }

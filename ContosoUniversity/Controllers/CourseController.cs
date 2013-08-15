@@ -102,7 +102,7 @@ namespace ContosoUniversity.Controllers
 
         //
         // GET: /Course/Delete/5
-
+         
         public ActionResult Delete(int id = 0)
         {
             Course course = db.Courses.Find(id);
@@ -129,6 +129,15 @@ namespace ContosoUniversity.Controllers
         {
             db.Dispose();
             base.Dispose(disposing);
+        }
+
+        public ActionResult UpdateCourseCredits(int? multiplier)
+        {
+            if (multiplier != null)
+            {
+                ViewBag.RowsAffected = db.Database.ExecuteSqlCommand("UPDATE Course SET Credits = Credits * {0}", multiplier);
+            }
+            return View();
         }
     }
 }

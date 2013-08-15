@@ -174,9 +174,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201308071356210_initial.cs" />
-    <Compile Include="Migrations\201308071356210_initial.Designer.cs">
-      <DependentUpon>201308071356210_initial.cs</DependentUpon>
+    <Compile Include="Migrations\201308151438371_InitialCreater.cs" />
+    <Compile Include="Migrations\201308151438371_InitialCreater.Designer.cs">
+      <DependentUpon>201308151438371_InitialCreater.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
@@ -250,6 +250,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <None Include="Properties\PublishProfiles\release.pubxml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
@@ -326,6 +327,7 @@
     <Content Include="Views\Department\Create.cshtml" />
     <Content Include="Views\Department\Edit.cshtml" />
     <Content Include="Views\Department\Delete.cshtml" />
+    <Content Include="Views\Course\UpdateCourseCredits.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -334,8 +336,8 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201308071356210_initial.resx">
-      <DependentUpon>201308071356210_initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201308151438371_InitialCreater.resx">
+      <DependentUpon>201308151438371_InitialCreater.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

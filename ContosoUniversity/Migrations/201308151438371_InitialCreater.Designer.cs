@@ -5,13 +5,13 @@ namespace ContosoUniversity.Migrations
     using System.Data.Entity.Migrations.Infrastructure;
     using System.Resources;
     
-    public sealed partial class initial : IMigrationMetadata
+    public sealed partial class InitialCreater : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(initial));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialCreater));
         
         string IMigrationMetadata.Id
         {
-            get { return "201308071356210_initial"; }
+            get { return "201308151438371_InitialCreater"; }
         }
         
         string IMigrationMetadata.Source
